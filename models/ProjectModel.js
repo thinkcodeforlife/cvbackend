@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 
-var ExperienceSchema = new mongoose.Schema({
+var ProjectSchema = new mongoose.Schema({
     title: {
         type: String,
         required: true
@@ -18,4 +18,4 @@ var ExperienceSchema = new mongoose.Schema({
         required: true
     }
 })
-module.exports = mongoose.model('experiences', ExperienceSchema);
+module.exports = mongoose.model('projects', ProjectSchema);
