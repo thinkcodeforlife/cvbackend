@@ -5,6 +5,7 @@ var CVModel = require('../models/CVModel');
 var ProjectModel = require('../models/ProjectModel');
 var CertificateModel = require('../models/CertificateModel');
 var ExperienceModel = require('../models/ExperienceModel');
+var SkillModel = require('../models/SkillModel');
 
 
 router.get('/test', function(req, res, next) {
@@ -53,5 +54,14 @@ router.get('/experiences', function(req, res, next) {
     });
 });
 
+router.get('/skills', function(req, res, next) {
+    SkillModel.find(function(err, skills) {
+        if (err) {
+            res.status(500).send(err);
+        } else {
+            res.status(200).send(skills);
+        }
+    });
+});
 
 module.exports = router;
