@@ -4,6 +4,7 @@ var router = express.Router();
 var CVModel = require('../models/CVModel');
 var ProjectModel = require('../models/ProjectModel');
 var CertificateModel = require('../models/CertificateModel');
+var ExperienceModel = require('../models/ExperienceModel');
 
 
 router.get('/test', function(req, res, next) {
@@ -39,9 +40,18 @@ router.get('/certificates', function(req, res, next) {
         } else {
             res.status(200).send(certificates);
         }
-    })
-})
+    });
+});
 
+router.get('/experiences', function(req, res, next) {
+    ExperienceModel.find(function(err, experiences) {
+        if (err) {
+            res.status(500).send(err);
+        } else {
+            res.status(200).send(experiences);
+        }
+    });
+});
 
 
 module.exports = router;

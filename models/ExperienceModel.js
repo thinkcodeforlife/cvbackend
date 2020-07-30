@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 
-var ProjectSchema = new mongoose.Schema({
+var ExperienceSchema = new mongoose.Schema({
     title: {
         type: String,
         required: true
@@ -9,14 +9,14 @@ var ProjectSchema = new mongoose.Schema({
         type: Date,
         required: true
     },
-    details: {
+    paragraph: {
         type: String,
         required: true
     },
-    stack: {
+    responsiblities: {
         type: Array,
         required: true
     }
 });
 
-module.exports = mongoose.model('projects', ProjectSchema);
+module.exports = mongoose.model('experiences', ExperienceSchema);
