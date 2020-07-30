@@ -1,8 +1,19 @@
 var express = require('express');
 var router = express.Router();
 
-var ProjectModel = require('../models/ProjectModel');
 var CVModel = require('../models/CVModel');
+var ProjectModel = require('../models/ProjectModel');
+var CertificateModel = require('../models/CertificateModel');
+
+
+router.get('/test', function(req, res, next) {
+    CVModel.find().then((deneme) => {
+        res.json(deneme);
+    }).catch((err) => {
+        res.json(err);
+    });
+});
+
 
 router.get('/projects', function(req, res, next) {
     ProjectModel.find().then((projects) => {
@@ -21,12 +32,16 @@ router.get('/projects', function(req, res, next) {
 
 });
 
-router.get('/test', function(req, res, next) {
-    CVModel.find().then((deneme) => {
-        res.json(deneme);
-    }).catch((err) => {
-        res.json(err);
-    });
-});
+router.get('/certificates', function(req, res, next) {
+    CertificateModel.find(function(err, certificates) {
+        if (err) {
+            res.status(500).send(err);
+        } else {
+            res.status(200).send(certificates);
+        }
+    })
+})
+
+
 
 module.exports = router;
