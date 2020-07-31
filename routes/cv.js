@@ -1,37 +1,33 @@
 var express = require('express');
 var router = express.Router();
 
-var CVModel = require('../models/CVModel');
+var NameModel = require('../models/NameModel');
 var ProjectModel = require('../models/ProjectModel');
 var CertificateModel = require('../models/CertificateModel');
 var ExperienceModel = require('../models/ExperienceModel');
 var SkillModel = require('../models/SkillModel');
+var AboutModel = require('../models/AboutModel');
 
-
-router.get('/test', function(req, res, next) {
-    CVModel.find().then((deneme) => {
-        res.json(deneme);
-    }).catch((err) => {
-        res.json(err);
+router.get('/names', function(req, res, next) {
+    NameModel.find(function(err, names) {
+        if (err) {
+            console.log("apitest->NameModel::err=>", err);
+            res.status(500).send(err);
+        } else {
+            console.log("apitest->NameModel::", names);
+            res.status(200).send(names);
+        }
     });
 });
 
-
 router.get('/projects', function(req, res, next) {
-    ProjectModel.find().then((projects) => {
-            res.json(projects);
-        }).catch((err) => {
-            res.json(err);
+    ProjectModel.find(function(err, projects) {
+        if (err) {
+            res.status(500).send(err);
+        } else {
+            res.status(200).send(projects);
+        }
     });
-
-    // ExperienceModel.find(function(err, projects) {
-    //   if (err) {
-    //     res.status(500).send(err);
-    //   } else {
-    //     res.json(projects);
-    //   }
-    // });
-
 });
 
 router.get('/certificates', function(req, res, next) {
@@ -60,6 +56,16 @@ router.get('/skills', function(req, res, next) {
             res.status(500).send(err);
         } else {
             res.status(200).send(skills);
+        }
+    });
+});
+
+router.get('/aboutme', function(req, res, next) {
+    AboutModel.find(function(err, aboutme) {
+        if (err) {
+            res.status(500).send(err);
+        } else {
+            res.status(200).send(aboutme);
         }
     });
 });
